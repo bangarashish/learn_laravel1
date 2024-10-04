@@ -8,8 +8,6 @@ class AdminController extends Controller
 {
     public function index(){
 
-        $date = Carbon::now();
-
-        return $date;
+        
     }
 }
