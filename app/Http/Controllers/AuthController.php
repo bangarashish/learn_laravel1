@@ -6,19 +6,22 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Admin;
 use Hash;
+
 class AuthController extends Controller
 {
-    public function index(){
+    public function index()
+    {
 
         return view('admin.login');
     }
 
-    public function login(Request $request){
+    public function login(Request $request)
+    {
 
-            // $hashedEmail = Hash::make('email');
+        // $hashedEmail = Hash::make('email');
         //$hash = Hash::make('password');
 
-       // dd($hash);
+        // dd($hash);
         // $credentials = [
         //     'email' => $request->input('email'),
         //     'password' => $request->input('password'),
@@ -37,18 +40,16 @@ class AuthController extends Controller
             'password' => $request->input('password'),
         ];
 
-        
+
         //$user = Auth::guard('admin')->attempt($credentials);
-        
-            //dd($user);
-        if(Auth::guard('admin')->attempt($credentials)){
-            
-           // dd('ok');
+
+        //dd($user);
+        if (Auth::guard('admin')->attempt($credentials)) {
+
+            // dd('ok');
             return redirect()->route('/adminDashboard');
         }
 
-
-
-
+        return back()->with('error', 'The provided credentials do not match our records.')->withInput();
     }
 }
